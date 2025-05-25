@@ -20,13 +20,14 @@ API para gerenciar a lógica de negócio de avaliação de projetos. Com autenti
 ## 📁 Estrutura de Pastas
 
 ```
+├── prisma/             # Schema e migrations do Prisma
 src/
+├── config/             # configurações da app
 ├── controllers/        # Lógica dos controladores HTTP
 ├── middlewares/        # Middlewares (ex: autenticação)
 ├── repositories/       # Comunicação com o banco (Prisma)
 ├── routes/             # Definição das rotas Express
 ├── services/           # Regras de negócio
-├── prisma/             # Schema e migrations do Prisma
 ├── app.ts           # Configuração do Express
 ├── server.ts        # Ponto de entrada da aplicação
 ```
