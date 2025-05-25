@@ -1,6 +1,6 @@
-# 🔐 Auth API - Node.js, TypeScript, Prisma & JWT
+# 🔐 Avalia-PRO
 
-API de autenticação construída com Express, Prisma ORM, TypeScript e PostgreSQL. Suporta criação de usuários, login com senha criptografada e autenticação via token JWT.
+API para gerenciar a lógica de negócio de avaliação de projetos. Com autenticação e construída com Express, Prisma ORM, TypeScript e PostgreSQL. Suporta criação de usuários, login com senha criptografada e autenticação via token JWT.
 
 ---
 
@@ -179,14 +179,6 @@ Content-Type: application/json
   "prisma:studio": "npx prisma studio"
 }
 ```
-
----
-
-## 🧑‍💻 Autor
-
-**Seu Nome**  
-[GitHub](https://github.com/seu-usuario)  
-[LinkedIn](https://www.linkedin.com/in/seu-perfil)
 
 ---
 
