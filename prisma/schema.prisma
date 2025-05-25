@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
   provider = "prisma-client-js"
@@ -13,6 +8,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
+//=================================================== USUARIO =================================================
 model Usuario {
   id        Int     @id @default(autoincrement())
   nome      String
@@ -22,4 +19,95 @@ model Usuario {
   senha     String
 }
 
+//=================================================== PROJETO =================================================
 
+enum AreaTematica {
+  EDUCACAO_CIENCIAS_HUMANAS
+  MEIO_AMBIENTE
+  CIENCIAS_EXATAS_E_TERRA
+  INOVACAO_TECNOLOGIA
+  SAUDE_BEM_ESTAR
+  ECONOMIA_EMPREENDEDORISMO
+  ARTES_CULTURA
+  DIREITOS_HUMANOS_CIDADANIA
+}
+
+model Projeto {
+  id                Int          @id @default(autoincrement())
+  titulo            String
+  areaTematica      AreaTematica
+  resumo            String       @db.Text
+  dataCadastro      DateTime     @default(now())
+  status            Boolean
+  situacao          String
+  nota              Float
+  parecerDescritivo String       @db.Text
+  autores           Autor[]
+  
+  premioId          Int
+  premio            Premio @relation(fields: [premioId], references: [id])
+
+  avaliadorId       Int
+  avaliador         Avaliador @relation(fields: [avaliadorId], references: [id])
+
+}
+
+
+//=================================================== AUTOR =================================================
+
+model Autor {
+  id                Int     @id @default(autoincrement())
+  nome              String
+  email             String @unique
+  cpf               String @unique
+  telefone          String
+  instituicao       String
+  status            Boolean
+
+  projetos          Projeto[]
+}
+
+
+//=================================================== PREMIO =================================================
+
+
+model Premio {
+  id                Int     @id @default(autoincrement())
+  nome              String
+  descricao         String
+  dataInicio        DateTime
+  dataFim           DateTime
+  detalheCronograma String @db.Text
+  anoEdicao         Int
+  status            Boolean
+  projetos          Projeto[]
+}
+
+
+//=================================================== AVALIADOR =================================================
+
+
+enum AreaEspecializacao {
+  DESENVOLVIMENTO_WEB
+  INTELIGENCIA_ARTIFICIAL
+  MACHINE_LEARNING
+  BANCO_DE_DADOS
+  SEGURANCA_DA_INFORMACAO
+  SISTEMAS_DISTRIBUIDOS
+}
+
+model Avaliador {
+  id                 Int     @id @default(autoincrement())
+  nome               String
+  email              String @unique
+  cpf                String @unique
+  telefone           String
+  dataNascimento     DateTime
+  genero             String
+  instituicao        String
+  areaAtuacao        String
+  areaEspecializacao String
+  status             Boolean
+
+  projeto            Projeto[]
+}
