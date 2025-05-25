@@ -1,4 +1,4 @@
-# 🔐 Avalia-PRO
+# Avalia-PRO
 
 API para gerenciar a lógica de negócio de avaliação de projetos. Com autenticação e construída com Express, Prisma ORM, TypeScript e PostgreSQL. Suporta criação de usuários, login com senha criptografada e autenticação via token JWT.
 
@@ -27,7 +27,8 @@ src/
 ├── routes/             # Definição das rotas Express
 ├── services/           # Regras de negócio
 ├── prisma/             # Schema e migrations do Prisma
-└── index.ts            # Arquivo principal da aplicação
+├── app.ts           # Configuração do Express
+├── server.ts        # Ponto de entrada da aplicação
 ```
 
 ---
