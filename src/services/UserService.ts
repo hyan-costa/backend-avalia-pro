@@ -6,7 +6,7 @@ export class UserService {
   constructor(private readonly userRepository: IUserRepository) {}
 
   async createUser(
-    nome: string,
+    nome: string, 
     email: string,
     senha: string
   ): Promise<Usuario> {

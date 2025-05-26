@@ -2,7 +2,7 @@ import { Usuario } from "@prisma/client";
 
 export interface IUserRepository {
   create(
-    data: Omit<Usuario, "id" | "createdAt" | "updatedAt">
+    data: Omit<Usuario, "id" | "createdAt" | "updatedAt" | "status">
   ): Promise<Usuario>;
   findById(
     id: number

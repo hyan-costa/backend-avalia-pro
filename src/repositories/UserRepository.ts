@@ -4,7 +4,7 @@ import { prisma } from "../config/prisma";
 
 export class UserRepository implements IUserRepository {
   async create(
-    data: Omit<Usuario, "id" | "createdAt" | "updatedAt">
+    data: Omit<Usuario, "id" | "createdAt" | "updatedAt" | "status">
   ): Promise<Usuario> {
     return prisma.usuario.create({ data });
   }

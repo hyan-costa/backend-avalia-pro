@@ -17,6 +17,7 @@ model Usuario {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   senha     String
+  status    Boolean  @default(true)
 }
 
 //=================================================== PROJETO =================================================
@@ -38,7 +39,7 @@ model Projeto {
   areaTematica      AreaTematica
   resumo            String       @db.Text
   dataCadastro      DateTime     @default(now())
-  status            Boolean
+  status            Boolean      @default(true)
   situacao          String
   nota              Float
   parecerDescritivo String       @db.Text
@@ -62,7 +63,7 @@ model Autor {
   cpf               String @unique
   telefone          String
   instituicao       String
-  status            Boolean
+  status            Boolean @default(true)
 
   projetos          Projeto[]
 }
@@ -77,9 +78,9 @@ model Premio {
   descricao         String
   dataInicio        DateTime
   dataFim           DateTime
-  detalheCronograma String @db.Text
+  detalheCronograma String  @db.Text
   anoEdicao         Int
-  status            Boolean
+  status            Boolean @default(true)
   projetos          Projeto[]
 }
 
@@ -97,17 +98,17 @@ enum AreaEspecializacao {
 }
 
 model Avaliador {
-  id                 Int     @id @default(autoincrement())
+  id                 Int      @id @default(autoincrement())
   nome               String
-  email              String @unique
-  cpf                String @unique
+  email              String   @unique
+  cpf                String   @unique
   telefone           String
   dataNascimento     DateTime
   genero             String
   instituicao        String
   areaAtuacao        String
-  areaEspecializacao String
-  status             Boolean
+  areaEspecializacao AreaEspecializacao
+  status             Boolean  @default(true)
 
   projeto            Projeto[]
 }
