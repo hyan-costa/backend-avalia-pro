@@ -190,7 +190,3 @@ Este projeto está sob a licença MIT.
 
 
 
-
-fix:	Patch (x.y.**z+1**)	fix: corrige bug no login
-feat:	Minor (x.**y+1**.0)	feat: adiciona filtro por e-mail
-feat!: ou BREAKING CHANGE:	Major (**x+1**.0.0)	feat!: remove campo telefone do DTO
