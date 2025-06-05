@@ -1,5 +1,5 @@
 import { Avaliador, Projeto } from "@prisma/client";
-import { CreateAvaliadorDTO } from "../dto/avaliador";
+import { CreateAvaliadorDTO } from "../../dto/avaliador";
 
 export interface IAvaliadorRepository {
   create(data: CreateAvaliadorDTO): Promise<Avaliador>;

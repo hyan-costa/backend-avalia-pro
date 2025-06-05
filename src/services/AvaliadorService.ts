@@ -1,6 +1,6 @@
 import { Avaliador, Projeto } from "@prisma/client";
 import { CreateAvaliadorDTO } from "../dto/avaliador";
-import { IAvaliadorRepository } from "../repositories/IAvaliadorRepository";
+import { IAvaliadorRepository } from "../repositories/interface/IAvaliadorRepository";
 
 export class AvaliadorService {
   constructor(private readonly avaliadorRepository: IAvaliadorRepository) {}

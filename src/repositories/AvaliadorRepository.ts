@@ -1,5 +1,5 @@
 import { Avaliador, Projeto } from "@prisma/client";
-import { IAvaliadorRepository } from "./IAvaliadorRepository";
+import { IAvaliadorRepository } from "./interface/IAvaliadorRepository";
 import { prisma } from "../config/prisma";
 import { CreateAvaliadorDTO } from "../dto/avaliador";
 

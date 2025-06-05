@@ -1,5 +1,5 @@
 import { Usuario } from "@prisma/client";
-import { IUserRepository } from "./IUserRepository";
+import { IUserRepository } from "./interface/IUserRepository";
 import { prisma } from "../config/prisma";
 
 export class UserRepository implements IUserRepository {
