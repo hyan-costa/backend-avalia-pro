@@ -165,4 +165,9 @@ export class AutorService {
       throw new Error(`Não foi possível contar os projetos do autor: ${error.message}`);
     }
   }
+
+
+  async mediaNotas(autorId: number): Promise<number | null> {
+    return this.autorRepository.mediaNotas(autorId);
+  }
 }

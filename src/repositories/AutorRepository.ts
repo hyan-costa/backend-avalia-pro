@@ -5,6 +5,7 @@ import { prisma } from "../config/prisma";
 
 // Implementação concreta da interface IAutorRepository utilizando Prisma.
 export class AutorRepository implements IAutorRepository {
+
   /**
    * Cria um novo autor no banco de dados.
    * @param data - Dados para a criação do autor.
@@ -190,4 +191,27 @@ export class AutorRepository implements IAutorRepository {
       throw new Error(`Erro ao contar projetos do autor: ${error.message}`);
     }
   }
+
+
+  async mediaNotas(autorId: number): Promise<number | null> {
+    try {
+    const resultado = await prisma.projeto.aggregate({
+      where: {
+        autores:{
+          some:{
+            id:autorId
+          }
+        }
+      },
+      _avg: {
+        nota: true,
+      },
+    });
+    return resultado._avg.nota;
+  } catch (error: any) {
+    throw new Error(
+      "Erro ao buscar média dos projetos do avaliador: " + error.message
+    );
+  }
+}
 }

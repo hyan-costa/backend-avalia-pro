@@ -41,15 +41,15 @@ model Projeto {
   dataCadastro      DateTime     @default(now())
   status            Boolean      @default(true)
   situacao          String
-  nota              Float
-  parecerDescritivo String       @db.Text
+  nota              Float?
+  parecerDescritivo String?      @db.Text
   autores           Autor[]
   
   premioId          Int
   premio            Premio @relation(fields: [premioId], references: [id])
 
-  avaliadorId       Int
-  avaliador         Avaliador @relation(fields: [avaliadorId], references: [id])
+  avaliadorId       Int?
+  avaliador         Avaliador? @relation(fields: [avaliadorId], references: [id])
 
 }
 

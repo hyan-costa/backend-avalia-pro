@@ -11,19 +11,27 @@ export class ProjetoRepository implements IProjetoRepository {
    * Cria um novo projeto no banco de dados, conectando os autores fornecidos.
    */
   async create(data: CreateProjetoDTO): Promise<Projeto> {
-    const { autorIds, ...projetoData } = data;
     try {
       return await prisma.projeto.create({
         data: {
-          ...projetoData, // Contém titulo, areaTematica, resumo, premioId, avaliadorId
-          nota: 0.0, // Valor padrão para nota ao criar o projeto
-          parecerDescritivo: "Pendente de avaliação", // Valor padrão para parecerDescritivo
-          situacao: data.situacao || SituacaoProjeto.SUBMETIDO, // Default situation
-          autores: {
-            connect: autorIds.map((id) => ({ id })),
+          titulo: data.titulo,
+          areaTematica: data.areaTematica,
+          resumo: data.resumo,
+          situacao: data.situacao || SituacaoProjeto.SUBMETIDO,
+          nota: 0,
+          parecerDescritivo: "Pendente de avaliação.",
+          premio: {
+            connect: { id: data.premioId },
           },
+          autores: {
+            connect: data.autorIds.map((id) => ({ id })),
+          }
         },
-        include: { autores: true, premio: true, avaliador: true }, // Include related entities
+        include: {
+          autores: true,
+          premio: true,
+          avaliador: true,
+        },
       });
     } catch (error: any) {
       console.error("Erro ao criar projeto:", error);

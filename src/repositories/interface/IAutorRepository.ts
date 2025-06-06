@@ -65,4 +65,11 @@ export interface IAutorRepository {
    * @returns O número total de projetos do autor.
    */
   countProjetosByAutor(autorId: number): Promise<number>;
+
+  /**
+   * Conta o número total de projetos ativos associados a um autor específico.
+   * @param autorId - O ID do autor.
+   * @returns A média de pontuação.
+   */
+  mediaNotas(autorId: number): Promise<number | null>;
 }

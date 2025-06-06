@@ -25,17 +25,14 @@ export class ProjetoService {
    * @returns O projeto criado com suas relações.
    */
   async createProjeto(data: CreateProjetoDTO): Promise<ProjetoComRelacoes> {
-    const { titulo, premioId, avaliadorId, autorIds } = data;
+    const { titulo, premioId, autorIds } = data;
 
     const premio = await this.premioRepository.findById(premioId);
     if (!premio || !premio.status) {
       throw new Error("Prêmio não encontrado, inativo ou inválido.");
     }
 
-    const avaliador = await this.avaliadorRepository.findById(avaliadorId);
-    if (!avaliador || !avaliador.status) {
-      throw new Error("Avaliador não encontrado, inativo ou inválido.");
-    }
+    
 
     if (!autorIds || autorIds.length === 0) {
         throw new Error("O projeto deve ter pelo menos um autor.");
