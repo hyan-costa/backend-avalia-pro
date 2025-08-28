@@ -44,4 +44,4 @@ router.get("/avaliadores/:id/projetos/media", authenticateToken, (req, res) =>
 router.put("/avaliadores/:id", authenticateToken, (req, res) =>
   avaliadorController.update(req, res)
 );
-export default router;
+export default router;  

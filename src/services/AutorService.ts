@@ -134,7 +134,7 @@ export class AutorService {
    * @returns Uma lista de projetos.
    * @throws Error se o autor não for encontrado ou se houver erro na busca.
    */
-  async getProjetosDoAutor(autorId: number): Promise<Projeto[]> {
+  async getProjetos(autorId: number): Promise<Projeto[]> {
     const autor = await this.autorRepository.findById(autorId);
     if (!autor || !autor.status) {
       throw new Error("Autor não encontrado ou inativo.");
@@ -153,7 +153,7 @@ export class AutorService {
    * @returns O número de projetos.
    * @throws Error se o autor não for encontrado ou se houver erro na contagem.
    */
-  async countProjetosDoAutor(autorId: number): Promise<number> {
+  async countProjetos(autorId: number): Promise<number> {
     const autor = await this.autorRepository.findById(autorId);
     if (!autor || !autor.status) {
       throw new Error("Autor não encontrado ou inativo.");

@@ -25,7 +25,11 @@ export class ProjetoController {
 
   async create(req: Request, res: Response) {
     try {
-      const data: CreateProjetoDTO = req.body;
+      const { premioId, ...rest } = req.body;
+      const data: CreateProjetoDTO = {
+        ...rest,
+        premioId: Number(premioId)
+      };
       const projeto = await projetoService.createProjeto(data);
       res.status(201).json(projeto);
     } catch (error: any) {
@@ -56,7 +60,16 @@ export class ProjetoController {
   async update(req: Request, res: Response) {
     try {
       const id = Number(req.params.id);
-      const data: UpdateProjetoDTO = req.body;
+      const {
+        titulo, areaTematica, resumo, premioId, avaliadorId, autorIds, situacao,
+        nota, parecerDescritivo, status
+      } = req.body;
+
+      const data: UpdateProjetoDTO = {
+        titulo, areaTematica, resumo, premioId, avaliadorId, autorIds, situacao,
+        nota, parecerDescritivo, status
+      };
+
       const projeto = await projetoService.updateProjeto(id, data);
       res.json(projeto);
     } catch (error: any) {
@@ -83,7 +96,13 @@ export class ProjetoController {
   async evaluate(req: Request, res: Response) {
     try {
       const id = Number(req.params.id);
-      const data: EvaluateProjetoDTO = req.body;
+      const { nota, parecerDescritivo, situacao, avaliadorId } = req.body;
+      const data: EvaluateProjetoDTO = {
+        nota: Number(nota),
+        parecerDescritivo,
+        situacao,
+        avaliadorId: Number(avaliadorId),
+      };
       const projeto = await projetoService.evaluateProjeto(id, data);
       res.json(projeto);
     } catch (error: any) {

@@ -30,7 +30,18 @@ router.delete("/autores/:id", authenticateToken, (req, res) =>
   autorController.delete(req, res)
 );
 // Rota para mostrar a média de um autor
-router.post("/autores/:id/projetos/media", authenticateToken, (req, res) =>
+// Rota para listar os projetos de um autor
+router.get("/autores/:id/projetos", authenticateToken, (req, res) =>
+  autorController.getProjetos(req, res)
+);
+
+// Rota para contar os projetos de um autor
+router.get("/autores/:id/projetos/count", authenticateToken, (req, res) =>
+  autorController.countProjetos(req, res)
+);
+
+// Rota para mostrar a média de um autor
+router.get("/autores/:id/projetos/media", authenticateToken, (req, res) =>
   autorController.mediaNotas(req, res)
 );
 export default router;

@@ -62,4 +62,5 @@ export type EvaluateProjetoDTO = {
   nota: number;
   parecerDescritivo: string;
   situacao: SituacaoProjeto; // Ex: AVALIADO_APROVADO, AVALIADO_REPROVADO, PENDENTE_AJUSTES
+  avaliadorId: number;
 };

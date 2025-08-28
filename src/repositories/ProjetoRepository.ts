@@ -11,20 +11,13 @@ export class ProjetoRepository implements IProjetoRepository {
    * Cria um novo projeto no banco de dados, conectando os autores fornecidos.
    */
   async create(data: CreateProjetoDTO): Promise<Projeto> {
+    const { autorIds, ...rest } = data;
     try {
       return await prisma.projeto.create({
         data: {
-          titulo: data.titulo,
-          areaTematica: data.areaTematica,
-          resumo: data.resumo,
-          situacao: data.situacao || SituacaoProjeto.SUBMETIDO,
-          nota: 0,
-          parecerDescritivo: "Pendente de avaliação.",
-          premio: {
-            connect: { id: data.premioId },
-          },
+          ...rest,
           autores: {
-            connect: data.autorIds.map((id) => ({ id })),
+            connect: autorIds.map(id => ({ id }))
           }
         },
         include: {
@@ -100,9 +93,11 @@ export class ProjetoRepository implements IProjetoRepository {
    */
   async update(id: number, data: UpdateProjetoDTO): Promise<Projeto> {
     const {
+      id: _id, // Exclude id from data
       autorIds,
       nota,
       parecerDescritivo,
+      premioId, // Extract premioId
       ...baseData // Resto dos campos do UpdateProjetoDTO
     } = data;
 

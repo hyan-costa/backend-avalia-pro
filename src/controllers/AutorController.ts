@@ -86,4 +86,24 @@ export class AutorController {
         res.status(500).json({ error: error.message });
         }
     }
+
+    async getProjetos(req: Request, res: Response) {
+        try {
+            const autorId = Number(req.params.id);
+            const projetos = await autorService.getProjetos(autorId);
+            res.json(projetos);
+        } catch (error: any) {
+            res.status(500).json({ error: error.message });
+        }
+    }
+
+    async countProjetos(req: Request, res: Response) {
+        try {
+            const autorId = Number(req.params.id);
+            const count = await autorService.countProjetos(autorId);
+            res.json({ count });
+        } catch (error: any) {
+            res.status(500).json({ error: error.message });
+        }
+    }
 }
