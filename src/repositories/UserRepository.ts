@@ -1,10 +1,10 @@
-import { Usuario } from "@prisma/client";
+import { Usuario, Role } from "@prisma/client";
 import { IUserRepository } from "./interface/IUserRepository";
 import { prisma } from "../config/prisma";
 
 export class UserRepository implements IUserRepository {
   async create(
-    data: Omit<Usuario, "id" | "createdAt" | "updatedAt" | "status">
+    data: Pick<Usuario, "nome" | "email" | "senha" | "role">
   ): Promise<Usuario> {
     return prisma.usuario.create({ data });
   }

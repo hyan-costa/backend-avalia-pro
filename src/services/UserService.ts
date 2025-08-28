@@ -1,22 +1,29 @@
-import { Usuario } from "@prisma/client";
+import { Usuario, Role } from "@prisma/client";
 import { IUserRepository } from "../repositories/interface/IUserRepository";
 import bcrypt from "bcryptjs";
+import { CreateUserDTO } from "../dto/user";
 
 export class UserService {
   constructor(private readonly userRepository: IUserRepository) {}
 
-  async createUser(
-    nome: string, 
-    email: string,
-    senha: string
-  ): Promise<Usuario> {
+  async createUser(data: CreateUserDTO): Promise<Usuario> {
+    const { nome, email, password, role } = data;
+
     const existing = await this.userRepository.findByEmail(email);
     if (existing) {
       throw new Error("Usuário já existe com esse e-mail");
     }
 
-    const hashedPassword = await bcrypt.hash(senha, 10);
-    return this.userRepository.create({ nome, email, senha: hashedPassword });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    
+    const userRole = role || Role.USER;
+
+    return this.userRepository.create({
+      nome,
+      email,
+      senha: hashedPassword,
+      role: userRole
+    });
   }
 
   async login(email: string, senha: string): Promise<Usuario | null> {

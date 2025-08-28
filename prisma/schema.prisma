@@ -9,6 +9,11 @@ datasource db {
 }
 
 
+enum Role {
+  USER
+  ADMIN
+}
+
 //=================================================== USUARIO =================================================
 model Usuario {
   id        Int     @id @default(autoincrement())
@@ -18,6 +23,7 @@ model Usuario {
   updatedAt DateTime @updatedAt
   senha     String
   status    Boolean  @default(true)
+  role      Role     @default(USER)
 }
 
 //=================================================== PROJETO =================================================

@@ -3,6 +3,7 @@ import { UserService } from "../services/UserService";
 import { UserRepository } from "../repositories/UserRepository";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { CreateUserDTO } from "../dto/user";
 dotenv.config();
 
 const userRepository = new UserRepository();
@@ -11,9 +12,9 @@ export class UserController {
   private userService = new UserService(userRepository);
 
   async create(req: Request, res: Response) {
-    const { nome, email, senha } = req.body;
     try {
-      const user = await this.userService.createUser(nome, email, senha);
+      const data: CreateUserDTO = req.body;
+      const user = await this.userService.createUser(data);
       res.status(201).json(user);
     } catch (error: any) {
       res.status(400).json({ error: error.message });
